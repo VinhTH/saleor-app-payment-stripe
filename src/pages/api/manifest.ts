@@ -9,6 +9,10 @@ import { transactionChargeRequestedSyncWebhook } from "./webhooks/saleor/transac
 import { transactionProcessSessionSyncWebhook } from "./webhooks/saleor/transaction-process-session";
 import { transactionRefundRequestedSyncWebhook } from "./webhooks/saleor/transaction-refund-requested";
 
+import { env } from "@/lib/env.mjs";
+
+const apiBaseUrl = env.VERCEL_URL ?? "toto";
+
 export default createManifestHandler({
   async manifestFactory(context) {
     const manifest: AppManifest = {
@@ -28,12 +32,12 @@ export default createManifestHandler({
         },
       },
       webhooks: [
-        paymentGatewayInitializeSessionSyncWebhook.getWebhookManifest(context.appBaseUrl),
-        transactionInitializeSessionSyncWebhook.getWebhookManifest(context.appBaseUrl),
-        transactionProcessSessionSyncWebhook.getWebhookManifest(context.appBaseUrl),
-        transactionCancelationRequestedSyncWebhook.getWebhookManifest(context.appBaseUrl),
-        transactionChargeRequestedSyncWebhook.getWebhookManifest(context.appBaseUrl),
-        transactionRefundRequestedSyncWebhook.getWebhookManifest(context.appBaseUrl),
+        paymentGatewayInitializeSessionSyncWebhook.getWebhookManifest(apiBaseUrl),
+        transactionInitializeSessionSyncWebhook.getWebhookManifest(apiBaseUrl),
+        transactionProcessSessionSyncWebhook.getWebhookManifest(apiBaseUrl),
+        transactionCancelationRequestedSyncWebhook.getWebhookManifest(apiBaseUrl),
+        transactionChargeRequestedSyncWebhook.getWebhookManifest(apiBaseUrl),
+        transactionRefundRequestedSyncWebhook.getWebhookManifest(apiBaseUrl),
       ],
       extensions: [],
     };
