@@ -1,12 +1,9 @@
 import { createAppRegisterHandler } from "@saleor/app-sdk/handlers/next";
-import { UpstashAPL } from "@saleor/app-sdk/APL";
+import { saleorApp } from "../../saleor-app";
 import { createLogger } from "@/lib/logger";
 
 export default createAppRegisterHandler({
-  apl: new UpstashAPL({
-    restURL: "https://wealthy-prawn-52787.upstash.io",
-    restToken: "Ac4zAAIncDFjZDIwNzYwMzk4ZDU0ZGJmOWQ1OTA2OTQxNzkwODEwMnAxNTI3ODc",
-  }),
+  apl: saleorApp.apl,
   allowedSaleorUrls: ["https://store-epbbnruq.saleor.cloud/graphql/"], // optional, see options below
   async onRequestVerified(req, { authData, respondWithError }) {
     const logger = createLogger({}, { msgPrefix: "onRequestVerified " });
