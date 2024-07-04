@@ -1,10 +1,11 @@
 import { createAppRegisterHandler } from "@saleor/app-sdk/handlers/next";
 import { saleorApp } from "../../saleor-app";
 import { createLogger } from "@/lib/logger";
+import { env } from "@/lib/env.mjs";
 
 export default createAppRegisterHandler({
   apl: saleorApp.apl,
-  allowedSaleorUrls: ["https://store-epbbnruq.saleor.cloud/graphql/"], // optional, see options below
+  allowedSaleorUrls: [env.SALEOR_GRAPHQL_URL], // optional, see options below
   async onRequestVerified(req, { authData, respondWithError }) {
     const logger = createLogger({}, { msgPrefix: "onRequestVerified " });
     logger.info("Token: " + authData.token + " ");
