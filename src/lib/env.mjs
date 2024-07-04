@@ -26,7 +26,6 @@ export const env = createEnv({
     REST_APL_TOKEN: z.string().optional(),
     ALLOWED_DOMAIN_PATTERN: z.string().optional(),
     APP_API_BASE_URL: z.string().optional(),
-    APP_API_BASE_URL: z.string().optional(),
     SALEOR_GRAPHQL_URL: z.string().optional(),
   },
 
